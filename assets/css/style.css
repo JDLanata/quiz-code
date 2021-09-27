@@ -7,6 +7,10 @@ color: blue;
     color: red;
 }
 
-#buttons{
+ #buttons{
     display: none;
-}
+ } 
+
+ #questions{
+     display: none;
+ }
