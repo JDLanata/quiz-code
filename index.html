@@ -11,6 +11,7 @@
   <body>
     <header>
       <div id="highscore">Highscore:</div>
+      <!-- turn highschore into a button that when presed shows list of highscores? -->
       <div id="timer">Timer:</div>
     </header>
     <div id="quizSpace">
@@ -19,12 +20,20 @@
         <h2 id="questions"></h2>
       </section>
       <section id="buttons">
-        <button id="btn1"></button>
+        <button id="btn1" data-index ="0"></button>
         <!-- button place holder for quiz -->
-        <button id="btn2"></button>
-        <button id="btn3"></button>
-        <button id="btn4"></button>
-        <div id="vaild" >Your answer is: </div>
+        <button id="btn2" data-index ="1"></button>
+        <button id="btn3" data-index ="2"></button>
+        <button id="btn4" data-index ="3"></button>
+        <div id="valid" ></div>
+      </section>
+      <section id="nameAdd">
+        <input type="text">
+      </section>
+      <section >
+        <ul id="topScoreList">
+
+        </ul>
       </section>
     </div>
 

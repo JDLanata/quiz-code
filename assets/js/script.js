@@ -3,43 +3,60 @@ var highScore = document.getElementById("highscore");
 var timer = document.getElementById("timer");
 var quiz = document.getElementById("quizSpace");
 var start = document.getElementById("start");
+var scoreName = document.getElementById("nameAdd");
+
+//Variables for question and answer buttons
 var questBox = document.getElementById("questions");
 var btn1 = document.getElementById("btn1");
 var btn2 = document.getElementById("btn2");
 var btn3 = document.getElementById("btn3");
 var btn4 = document.getElementById("btn4");
+
+//button holder div variable
 var options = document.getElementById("buttons");
+
+
+// variable for message saying right or wrong answer
 var valid = document.getElementById("valid");
-var timerLeft = 60;
+
+
+
+
+
+//variable for timer
+var timerLeft = 10;
 console.log(timerLeft);
+
+//points to index in questions object
 var pointQuest = 0;
 console.log(pointQuest);
 
+var score = localStorage.getItem('score')
 //object the holds questions array, choices array and answers
 var questions = [
     {
         quest: "how tall is the moon?",
-        choice: ["8", "4", "6", "12"],
+        choice: ["1", "4", "6", "12"],
         answer: 0,
     },
     {
         quest: "how small is the moon?",
-        choice: ["8", "4", "6", "12"],
+        choice: ["8", "3", "6", "2"],
         answer: 1,
     },
     {
         quest: "how tall is the sand?",
-        choice: ["8", "4", "6", "12"],
+        choice: ["9", "6", "7", "24"],
         answer: 2,
     },
     {
         quest: "how small is the color red?",
-        choice: ["8", "4", "6", "12"],
+        choice: ["6", "1", "3", "8"],
         answer: 3,
     },
     {
         quest: "how may cats fit in a box?",
-        choice: ["8", "4", "6", "12"],
+        choice: ["8", "5", "6", "156"],
         answer: 2,
     },
 
@@ -54,50 +71,116 @@ function startQuiz() {
     show quiz question 1 and answer buttons
     start timer */
     start.style.display = "none";
-    timerLeft--; // needs to be put in a function for start and countdown
+    var timeInterval = setInterval(function () {
+        timerLeft--;
+        timer.textContent = "Timer: " + timerLeft;
+       
+        if (timerLeft === 0) {
+          clearInterval(timeInterval);
+          timer.textContent + "Times Up";
+          console.log(timer);
+        }
+          
+    
+      }, 1000);
     console.log(start);
-test();
+    test();
 }
 
-options.addEventListener("click",nextQuest);
 
 
 //displays quiz questions
 function test() {
     options.style.display = "initial"
     questBox.style.display = "initial"
-
+    
     questBox.textContent = questions[pointQuest].quest;
     btn1.textContent = questions[pointQuest].choice[0];
     btn2.textContent = questions[pointQuest].choice[1];
     btn3.textContent = questions[pointQuest].choice[2];
     btn4.textContent = questions[pointQuest].choice[3];
-// nextQuest();
+    
 
+    // nameList();
 }
+
+
 
 
 // adds a point to the pointQuest variable to move to the next question
 
-function nextQuest(){
-    if( questions[pointQuest].choice[0] === questions[pointQuest].answer){
+options.addEventListener("click", (event) => {
+
+    if (event.target.getAttribute("data-index") == questions[pointQuest].answer) {
         valid.textContent = "Correct";
-
-    }else{
-
-        // valid.textContent = "Worng";
+    
+    } else {
+    
+        valid.textContent = "Wrong";
     }
     
     
     pointQuest++;
+    if (pointQuest === questions.length){
 
-test();
-console.log(pointQuest);
-}
+        // nameList();
+    }
+
+
+    test();
+    // console.log(pointQuest);
+
+});
+
+
+
 
 
 // add timmer with highscore local storage loop
+function countdown() {
+    
+    var timeInterval = setInterval(function () {
+      timerLeft--;
+      timer.textContent = "Timer: " + timerLeft;
+     
+      if (timerLeft === 0) {
+        clearInterval(timeInterval);
+        timer.textContent + "Times Up";
+        console.log(timer);
+      }
+      /* else {
+          localStorage.setItem('score', timer)
+      } */
+
+
+  
+  
+    }, 1000);
+  }
+
+
+
+
 //add function with final score and input name form
-//
+function nameList() {
+
+        options.style.display = "none";
+        questBox.style.display = "none";
+        scoreName.style.display = 'initial';
+
+
+   
+    
+}
+
+
 
 // sellect what would be right answer inother funtion event listener?
+
+var newLi =document.createElement("li")
+ 
+function addList() {
+    scoreName.append('' )
+    
+}
+//

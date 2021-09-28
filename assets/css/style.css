@@ -14,3 +14,7 @@ color: blue;
  #questions{
      display: none;
  }
+
+ #nameAdd {
+    display: none;
+ }
