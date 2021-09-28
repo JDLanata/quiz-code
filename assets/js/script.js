@@ -24,7 +24,7 @@ var valid = document.getElementById("valid");
 
 
 //variable for timer
-var timerLeft = 10;
+var timerLeft = 120;
 console.log(timerLeft);
 
 //points to index in questions object
@@ -64,26 +64,30 @@ var questions = [
 
 // listens for start of quiz
 start.addEventListener("click", startQuiz);
-
+var timeInterval 
 
 function startQuiz() {
     /*Once button is pressed hide the start quiz button
     show quiz question 1 and answer buttons
     start timer */
     start.style.display = "none";
-    var timeInterval = setInterval(function () {
+     timeInterval = setInterval(function () {
         timerLeft--;
         timer.textContent = "Timer: " + timerLeft;
-       
+
         if (timerLeft === 0) {
-          clearInterval(timeInterval);
-          timer.textContent + "Times Up";
-          console.log(timer);
+            clearInterval(timeInterval);
+            timer.textContent = "Times Up";
+            console.log(timer);
         }
-          
-    
-      }, 1000);
+
+
+    }, 1000);
+
+
     console.log(start);
+
+
     test();
 }
 
@@ -93,39 +97,50 @@ function startQuiz() {
 function test() {
     options.style.display = "initial"
     questBox.style.display = "initial"
-    
+
     questBox.textContent = questions[pointQuest].quest;
     btn1.textContent = questions[pointQuest].choice[0];
     btn2.textContent = questions[pointQuest].choice[1];
     btn3.textContent = questions[pointQuest].choice[2];
     btn4.textContent = questions[pointQuest].choice[3];
-    
 
     // nameList();
 }
 
 
 
-
+var finalScore = 0;
 // adds a point to the pointQuest variable to move to the next question
 
 options.addEventListener("click", (event) => {
 
     if (event.target.getAttribute("data-index") == questions[pointQuest].answer) {
         valid.textContent = "Correct";
-    
+
     } else {
-    
+        //decrease timer when question is answered wrong
+        timerLeft -= 10;
         valid.textContent = "Wrong";
+
     }
-    
-    
+
+
     pointQuest++;
-    if (pointQuest === questions.length){
+    if (pointQuest === questions.length && timerLeft > 0) {
+        //save time to high score
+        clearInterval(timeInterval);
+        finalScore = timerLeft;
 
-        // nameList();
+        // timerLeft.textContent(finalScore);
+
+        nameList();
+        return;
+
     }
 
+    if (timerLeft <= 0) {
+        return;
+    }
 
     test();
     // console.log(pointQuest);
@@ -137,50 +152,51 @@ options.addEventListener("click", (event) => {
 
 
 // add timmer with highscore local storage loop
-function countdown() {
-    
-    var timeInterval = setInterval(function () {
-      timerLeft--;
-      timer.textContent = "Timer: " + timerLeft;
-     
-      if (timerLeft === 0) {
-        clearInterval(timeInterval);
-        timer.textContent + "Times Up";
-        console.log(timer);
-      }
-      /* else {
-          localStorage.setItem('score', timer)
-      } */
-
-
-  
-  
-    }, 1000);
-  }
 
 
 
 
 //add function with final score and input name form
 function nameList() {
+    timer.textContent = timerLeft;
+    options.style.display = "none";
+    questBox.style.display = "none";
+    scoreName.style.display = 'initial';
 
-        options.style.display = "none";
-        questBox.style.display = "none";
-        scoreName.style.display = 'initial';
-
-
-   
     
+
+
 }
-
-
+document.getElementById("submitBtn").addEventListener('click', addList);
 
 // sellect what would be right answer inother funtion event listener?
+//create and arry to hold top score list append that array with name inputs
+var topScoreList = document.getElementById("topScoreList")
+var scoreList = [ ];
 
-var newLi =document.createElement("li")
- 
-function addList() {
-    scoreName.append('' )
+var newLi = document.createElement("li")
+
+function addList(event) {
+    event.preventDefault();
     
+    var nameField = document.getElementById("nameFeild").value;
+    console.log(nameField);
+    
+var topScoreUpdate = {
+    user: nameField, 
+    score: finalScore,
+}
+    console.log(topScoreUpdate);
+
+    scoreList.push(topScoreUpdate);
+
+    console.log(scoreList);
+
+    newLi.append(nameField + " - " + finalScore);
+    topScoreList.append(newLi);
+
+    localStorage.setItem("scores", JSON.stringify(scoreList));
+
+
 }
 //
