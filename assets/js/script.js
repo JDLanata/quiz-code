@@ -172,31 +172,39 @@ document.getElementById("submitBtn").addEventListener('click', addList);
 // sellect what would be right answer inother funtion event listener?
 //create and arry to hold top score list append that array with name inputs
 var topScoreList = document.getElementById("topScoreList")
-var scoreList = [ ];
+var scoreList = JSON.parse(localStorage.getItem("scores")) || [ ];
 
-var newLi = document.createElement("li")
 
 function addList(event) {
     event.preventDefault();
     
+   
     var nameField = document.getElementById("nameFeild").value;
-    console.log(nameField);
+    
     
 var topScoreUpdate = {
     user: nameField, 
     score: finalScore,
 }
-    console.log(topScoreUpdate);
 
     scoreList.push(topScoreUpdate);
 
-    console.log(scoreList);
-
-    newLi.append(nameField + " - " + finalScore);
-    topScoreList.append(newLi);
+    for (let i = 0; i < scoreList.length; i++) {
+        
+        var newLi = document.createElement("li")
+        newLi.append(scoreList[i].user + " - " + scoreList[i].score);
+        topScoreList.append(newLi);
+        console.log(scoreList[i].user)
+    }
 
     localStorage.setItem("scores", JSON.stringify(scoreList));
+//if clicked once do not subit again..
+
+   //hide form 
 
 
 }
+
+var car = JSON.parse(localStorage.getItem("scores"))
+console.log(car);
 //
