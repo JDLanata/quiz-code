@@ -35,57 +35,57 @@ var score = localStorage.getItem('score')
 //object the holds questions array, choices array and answers
 var questions = [
     {
-        quest: "how tall is the moon?",
-        choice: ["1", "4", "6", "12"],
+        quest: "What is the first temple you have to go through after becoming an adult in Ocarina of TIme?",
+        choice: ["Forest Tepmle", "Water Temple", "Shadow Temple", "Spirit Temple"],
         answer: 0,
     },
     {
-        quest: "how small is the moon?",
-        choice: ["8", "3", "6", "2"],
+        quest: "What is the name of the joke shop that Fred and Gorge opened?",
+        choice: ["Wheezing Weasleys", "Weasleys' Wizard Wheezes", "Wizards Wheels", "F&G for the lols"],
         answer: 1,
     },
     {
-        quest: "how tall is the sand?",
-        choice: ["9", "6", "7", "24"],
+        quest: "What is the name of the Main Hero in the Legend of Zelda series?",
+        choice: ["Tingle", "Zelda", "Link", "Malon"],
         answer: 2,
     },
     {
-        quest: "how small is the color red?",
-        choice: ["6", "1", "3", "8"],
+        quest: "In Howl's Moving Castle, what is Calcifer?",
+        choice: ["A socerer", "Great and Powerful Fire Demon", "The Missing Prince", "The Which of the Waste in desgise"],
+        answer: 1,
+    },
+    {
+        quest: "Whar score on your O.W.L.S do you need to be able to join Professor Slughorns' Advanced Potions Class?",
+        choice: ["Acceptable ", "Dreadful ", "Troll", "Exceeds Expectations"],
         answer: 3,
-    },
-    {
-        quest: "how may cats fit in a box?",
-        choice: ["8", "5", "6", "156"],
-        answer: 2,
     },
 
 ]
 
 // listens for start of quiz
 start.addEventListener("click", startQuiz);
-var timeInterval 
+var timeInterval
 
 function startQuiz() {
     /*Once button is pressed hide the start quiz button
     show quiz question 1 and answer buttons
     start timer */
     start.style.display = "none";
-     timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         timerLeft--;
         timer.textContent = "Timer: " + timerLeft;
 
         if (timerLeft === 0) {
             clearInterval(timeInterval);
             timer.textContent = "Times Up";
-            console.log(timer);
+
         }
 
 
     }, 1000);
 
 
-    console.log(start);
+
 
 
     test();
@@ -95,8 +95,8 @@ function startQuiz() {
 
 //displays quiz questions
 function test() {
-    options.style.display = "initial"
-    questBox.style.display = "initial"
+    options.style.display = "block";
+    questBox.style.display = "block";
 
     questBox.textContent = questions[pointQuest].quest;
     btn1.textContent = questions[pointQuest].choice[0];
@@ -127,23 +127,25 @@ options.addEventListener("click", (event) => {
 
     pointQuest++;
     if (pointQuest === questions.length && timerLeft > 0) {
-        //save time to high score
+
         clearInterval(timeInterval);
         finalScore = timerLeft;
 
-        // timerLeft.textContent(finalScore);
-
+        valid.style.display= "none";
         nameList();
         return;
 
     }
 
     if (timerLeft <= 0) {
+        options.style.display = "none";
+        questBox.style.display = "none";
+        valid.style.display= "none";
         return;
     }
 
     test();
-    // console.log(pointQuest);
+
 
 });
 
@@ -163,7 +165,7 @@ function nameList() {
     questBox.style.display = "none";
     scoreName.style.display = 'initial';
 
-    
+
 
 
 }
@@ -172,39 +174,41 @@ document.getElementById("submitBtn").addEventListener('click', addList);
 // sellect what would be right answer inother funtion event listener?
 //create and arry to hold top score list append that array with name inputs
 var topScoreList = document.getElementById("topScoreList")
-var scoreList = JSON.parse(localStorage.getItem("scores")) || [ ];
+var scoreList = JSON.parse(localStorage.getItem("scores")) || [];
+
+
+highScore.textContent = "Last Score: " + scoreList[scoreList.length - 1].score;
 
 
 function addList(event) {
     event.preventDefault();
-    
-   
+
+
     var nameField = document.getElementById("nameFeild").value;
-    
-    
-var topScoreUpdate = {
-    user: nameField, 
-    score: finalScore,
-}
+
+
+    var topScoreUpdate = {
+        user: nameField,
+        score: finalScore,
+    }
 
     scoreList.push(topScoreUpdate);
 
     for (let i = 0; i < scoreList.length; i++) {
-        
+
         var newLi = document.createElement("li")
         newLi.append(scoreList[i].user + " - " + scoreList[i].score);
         topScoreList.append(newLi);
-        console.log(scoreList[i].user)
+
     }
 
     localStorage.setItem("scores", JSON.stringify(scoreList));
-//if clicked once do not subit again..
+    //if clicked once do not subit again..
 
-   //hide form 
+    //hide form 
 
 
 }
 
-var car = JSON.parse(localStorage.getItem("scores"))
-console.log(car);
+
 //

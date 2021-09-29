@@ -10,12 +10,16 @@
 
   <body>
     <header>
-      <div id="highscore">Highscore:</div>
-      <!-- turn highschore into a button that when presed shows list of highscores? -->
+      <div id="highscore">Last Score:</div>
       <div id="timer">Timer:</div>
     </header>
-    <div id="quizSpace">
-      <button id="start">Start Quiz</button>
+    <main id="quizSpace">
+      <section id="start">
+        <button id="startBtn">Start Quiz</button>
+        <p> Welcome to a simple quiz about some pop culture topics.
+        </p>
+        <p>Can you get the highscore?</p>
+      </section>
       <section>
         <h2 id="questions"></h2>
       </section>
@@ -25,10 +29,11 @@
         <button id="btn2" data-index ="1"></button>
         <button id="btn3" data-index ="2"></button>
         <button id="btn4" data-index ="3"></button>
-        <div id="valid" ></div>
       </section>
+      <div id="valid" ></div>
       <section id="nameAdd">
-        <input id="nameFeild" type="text">
+        <label for="letters">Enter your Name: </label>
+        <input id="nameFeild" type="text" name="letters">
         <input id="submitBtn" type="submit" value="Submit Score">
       </section>
       <section >
@@ -36,7 +41,7 @@
 
         </ul>
       </section>
-    </div>
+    </main>
 
     <script src="./assets/js/script.js"></script>
   </body>
