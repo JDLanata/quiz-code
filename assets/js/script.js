@@ -35,7 +35,7 @@ var score = localStorage.getItem('score')
 //object the holds questions array, choices array and answers
 var questions = [
     {
-        quest: "What is the first temple you have to go through after becoming an adult in Ocarina of TIme?",
+        quest: "What is the first temple you have to go through after becoming an adult in Ocarina of Time?",
         choice: ["Forest Tepmle", "Water Temple", "Shadow Temple", "Spirit Temple"],
         answer: 0,
     },

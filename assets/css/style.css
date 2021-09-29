@@ -23,7 +23,12 @@ p{
     font-size: medium;
 }
 #startBtn{
-
+    background-color: var(--option);
+    border: 1px solid var(--dark);
+    color: var(--light);
+    padding: 15px 32px;
+    margin: 15px 15px; 
+    font-size: 16px;
 }
 #highscore{
 color: var(--light);
@@ -58,7 +63,7 @@ color: var(--light);
     flex: 1;
     background-color: var(--option);
     border: 1px solid var(--dark);
-    color: white;
+    color: var(--light);
     padding: 15px 32px;
     margin: 15px 15px; 
     display: flex;
@@ -75,3 +80,12 @@ color: var(--light);
  #nameAdd {
     display: none;
  }
+
+ #submitBtn{
+     background-color: var(--option);
+     border: 1px solid var(--dark);
+     color: var(--light);
+     padding: 15px 32px;
+     margin: 15px 15px; 
+     font-size: 16px;
+    }
